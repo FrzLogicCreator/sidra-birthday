@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sidra Nurain</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0608; --deep: #110a0e; --red: #c0152a; --red-dark: #7a0a18;
+    --rose: #e8829a; --rose-gold: #d4836a; --blush: #f2b8c6;
+    --gold: #c9a96e; --cream: #fdf0f3; --text: #f5e6ea; --muted: #9a7a84;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle { position: absolute; border-radius: 50%; animation: float-up linear infinite; opacity: 0; }
+  @keyframes float-up {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 1; } 90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  .scene {
+    position: relative; z-index: 1; min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 2rem 1.5rem; overflow: hidden;
+  }
+
+  /* SCENE 1 */
+  #scene-1 { background: radial-gradient(ellipse at 50% 0%, #3a0a1a 0%, var(--black) 65%); text-align: center; }
+  .cakes-row { display: flex; gap: 1.2rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .cake { font-size: clamp(2.5rem,7vw,4.5rem); animation: cake-bounce 1.6s ease-in-out infinite; display: inline-block; filter: drop-shadow(0 0 18px rgba(192,21,42,0.5)); }
+  .cake:nth-child(2){animation-delay:.2s}.cake:nth-child(3){animation-delay:.4s}.cake:nth-child(4){animation-delay:.6s}.cake:nth-child(5){animation-delay:.8s}
+  @keyframes cake-bounce { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-18px) rotate(3deg)} }
+  .greeting-line { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,3vw,1.3rem); color:var(--rose); letter-spacing:.08em; margin-bottom:.6rem; opacity:0; animation:fade-in 1s .5s forwards; }
+  .main-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,9vw,6.5rem); font-weight:700; line-height:1.05; background:linear-gradient(135deg,var(--blush) 0%,var(--rose-gold) 40%,var(--gold) 70%,var(--rose) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.4rem; opacity:0; animation:fade-up 1s .9s forwards; }
+  .name-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,7vw,4.8rem); font-weight:400; font-style:italic; color:var(--blush); margin-bottom:2rem; opacity:0; animation:fade-up 1s 1.3s forwards; text-shadow:0 0 40px rgba(232,130,154,.3); }
+  .scroll-hint { font-size:.85rem; color:var(--muted); letter-spacing:.15em; opacity:0; animation:fade-in 1s 2.5s forwards; margin-top:1rem; }
+  .scroll-hint span { display:block; margin-top:.5rem; animation:bounce-down 1.5s ease-in-out infinite; }
+  @keyframes bounce-down { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  /* SCENE 2 */
+  #scene-2 { background:radial-gradient(ellipse at 50% 50%,#1f0510 0%,var(--black) 70%); gap:2rem; text-align:center; }
+  .heart-container { display:flex; flex-direction:column; align-items:center; gap:2rem; }
+  .heart-label { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.1rem,3vw,1.5rem); color:var(--muted); max-width:32ch; }
+  .heart-btn { background:none; border:none; cursor:pointer; display:block; padding:0; }
+  .heart-svg { width:clamp(130px,35vw,200px); height:auto; animation:heartbeat .9s ease-in-out infinite; filter:drop-shadow(0 0 30px rgba(192,21,42,.7)) drop-shadow(0 0 60px rgba(192,21,42,.3)); transition:transform .15s; }
+  @keyframes heartbeat { 0%{transform:scale(1)} 14%{transform:scale(1.18)} 28%{transform:scale(1)} 42%{transform:scale(1.12)} 70%{transform:scale(1)} 100%{transform:scale(1)} }
+  .tap-text { font-size:.85rem; color:var(--rose); letter-spacing:.2em; animation:pulse-opacity 2s ease-in-out infinite; }
+  @keyframes pulse-opacity { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+  /* SCENE 3 */
+  #scene-3 { background:radial-gradient(ellipse at 30% 50%,#200814 0%,var(--black) 60%); display:none; }
+  .question-card { background:linear-gradient(135deg,rgba(192,21,42,.08),rgba(212,131,106,.05)); border:1px solid rgba(232,130,154,.15); border-radius:24px; padding:clamp(2rem,5vw,3.5rem); max-width:540px; width:100%; text-align:center; backdrop-filter:blur(10px); box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05); }
+  .q-step { font-size:.75rem; letter-spacing:.25em; color:var(--rose-gold); margin-bottom:1.5rem; }
+  .q-text { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,4vw,1.9rem); line-height:1.4; color:var(--cream); margin-bottom:2.5rem; min-height:3em; }
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  .opt-btn { background:rgba(255,255,255,.03); border:1px solid rgba(232,130,154,.2); border-radius:14px; padding:1rem .8rem; color:var(--text); font-family:'DM Sans',sans-serif; font-size:clamp(.82rem,2.2vw,.95rem); cursor:pointer; transition:all .25s ease; text-align:center; line-height:1.4; }
+  .opt-btn:hover { background:rgba(192,21,42,.2); border-color:var(--rose); transform:translateY(-2px); box-shadow:0 8px 24px rgba(192,21,42,.2); }
+  .opt-btn.selected { background:linear-gradient(135deg,rgba(192,21,42,.4),rgba(212,131,106,.3)); border-color:var(--rose-gold); color:var(--cream); }
+  .reaction-text { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,3vw,1.3rem); color:var(--blush); margin-top:1.5rem; min-height:2em; opacity:0; transition:opacity .5s; }
+  .reaction-text.show { opacity:1; }
+  .next-btn { margin-top:1.5rem; background:linear-gradient(135deg,var(--red),var(--rose-gold)); border:none; border-radius:50px; padding:.9rem 2.5rem; color:white; font-family:'DM Sans',sans-serif; font-size:.95rem; font-weight:500; cursor:pointer; display:none; transition:all .25s; letter-spacing:.05em; box-shadow:0 8px 30px rgba(192,21,42,.35); }
+  .next-btn:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(192,21,42,.5); }
+
+  /* SCENE 4 */
+  #scene-4 { background:linear-gradient(180deg,var(--black) 0%,#130508 50%,var(--black) 100%); display:none; padding:4rem 1.5rem; min-height:auto; }
+  .gallery-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.4rem,4vw,2.2rem); color:var(--blush); text-align:center; margin-bottom:3rem; }
+  .photo-track { display:flex; flex-direction:column; gap:3.5rem; max-width:480px; margin:0 auto; width:100%; }
+  .photo-frame { opacity:0; transform:translateY(40px); transition:opacity .8s ease,transform .8s ease; }
+  .photo-frame.visible { opacity:1; transform:translateY(0); }
+  .photo-frame:nth-child(even) { transform:translateY(40px) rotate(1.5deg); }
+  .photo-frame:nth-child(even).visible { transform:translateY(0) rotate(1.5deg); }
+  .photo-frame:nth-child(odd) { transform:translateY(40px) rotate(-1deg); }
+  .photo-frame:nth-child(odd).visible { transform:translateY(0) rotate(-1deg); }
+  .photo-inner { background:var(--deep); border:1px solid rgba(232,130,154,.12); border-radius:4px; padding:1.2rem 1.2rem 2.5rem; box-shadow:0 20px 60px rgba(0,0,0,.6),0 2px 8px rgba(192,21,42,.1); position:relative; }
+  .photo-img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:2px; display:block; background:#0a0608; }
+  .video-item { cursor:pointer; }
+  .photo-caption { position:absolute; bottom:.9rem; left:1.2rem; right:1.2rem; font-family:'Playfair Display',serif; font-style:italic; font-size:.9rem; color:var(--muted); text-align:center; }
+
+  /* SCENE 5 */
+  #scene-5 { background:radial-gradient(ellipse at 50% 100%,#200814 0%,var(--black) 60%); display:none; padding:5rem 1.5rem; }
+  .letter-wrap { max-width:540px; width:100%; text-align:center; }
+  .letter-eyebrow { font-size:.75rem; letter-spacing:.3em; color:var(--rose-gold); margin-bottom:1.5rem; }
+  .letter-heading { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,5vw,3rem); background:linear-gradient(135deg,var(--blush),var(--rose-gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:2.5rem; }
+  .letter-body { font-size:clamp(1rem,2.5vw,1.15rem); line-height:1.9; color:var(--text); text-align:left; background:rgba(255,255,255,.02); border-left:2px solid rgba(192,21,42,.4); padding:2rem 2rem 2rem 2.5rem; border-radius:0 16px 16px 0; font-style:italic; font-family:'Playfair Display',serif; margin-bottom:2rem; }
+  .letter-sign { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.2rem,3vw,1.6rem); color:var(--rose); }
+  .letter-para { margin-bottom:1.4rem; font-size:clamp(.97rem,2.3vw,1.1rem); line-height:1.95; }
+  .letter-para:last-child { margin-bottom:0; }
+  .song-block { margin:2.5rem auto 2rem; max-width:420px; text-align:center; padding:1.8rem 2rem; border-top:1px solid rgba(232,130,154,.2); border-bottom:1px solid rgba(232,130,154,.2); position:relative; }
+  .song-block::before { content:'\201C'; font-family:'Playfair Display',serif; font-size:5rem; color:rgba(192,21,42,.18); position:absolute; top:-1.5rem; left:1rem; line-height:1; }
+  .song-line { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,2.8vw,1.25rem); color:var(--blush); line-height:1.8; display:block; letter-spacing:.01em; }
+  .song-line + .song-line { margin-top:.6rem; }
+  .song-attr { display:block; margin-top:1.2rem; font-size:.78rem; letter-spacing:.2em; color:var(--muted); }
+
+  /* SCENE 6 */
+  #scene-6 { background:radial-gradient(ellipse at 50% 50%,#2a0a18 0%,var(--black) 65%); display:none; text-align:center; }
+  .finale-emoji { font-size:clamp(3rem,10vw,5rem); margin-bottom:1.5rem; animation:spin-pop .8s ease-out forwards; }
+  @keyframes spin-pop { 0%{transform:scale(0) rotate(-180deg);opacity:0} 80%{transform:scale(1.15) rotate(5deg)} 100%{transform:scale(1) rotate(0deg);opacity:1} }
+  .finale-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,7vw,4.5rem); font-weight:700; background:linear-gradient(135deg,var(--blush),var(--rose-gold),var(--gold),var(--rose)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.1; margin-bottom:1rem; }
+  .finale-name { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.6rem,5vw,3rem); color:var(--blush); margin-bottom:2.5rem; }
+  .finale-sub { font-size:clamp(.9rem,2.5vw,1.1rem); color:var(--muted); max-width:32ch; line-height:1.6; margin:0 auto 2.5rem; }
+  .restart-btn { background:transparent; border:1px solid rgba(232,130,154,.3); border-radius:50px; padding:.8rem 2rem; color:var(--muted); font-family:'DM Sans',sans-serif; font-size:.85rem; cursor:pointer; transition:all .25s; letter-spacing:.05em; }
+  .restart-btn:hover { border-color:var(--rose); color:var(--rose); }
+
+  #confetti-canvas { position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0; transition:opacity .3s; }
+  #confetti-canvas.active { opacity:1; }
+
+  .progress-dots { position:fixed; right:1.5rem; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:.6rem; z-index:100; }
+  .dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.15); transition:all .3s; }
+  .dot.active { background:var(--rose); box-shadow:0 0 10px var(--rose); transform:scale(1.4); }
+
+  @keyframes fade-in { from{opacity:0} to{opacity:1} }
+  @keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:480px) { .options-grid{grid-template-columns:1fr} .progress-dots{right:.8rem} .question-card{padding:1.8rem 1.3rem} }
+  @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="progress-dots" aria-label="Progress">
+  <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+</nav>
+
+<!-- SCENE 1 — LANDING -->
+<section class="scene" id="scene-1">
+  <div class="cakes-row" aria-hidden="true">
+    <span class="cake">🎂</span><span class="cake">🎂</span><span class="cake">🎂</span>
+    <span class="cake">🎂</span><span class="cake">🎂</span>
+  </div>
+  <p class="greeting-line">the universe would like to announce that</p>
+  <h1 class="main-title">Happy Birthday</h1>
+  <h2 class="name-title">Sidra Nurain</h2>
+  <p class="scroll-hint">scroll down, something is waiting for you<span>↓</span></p>
+</section>
+
+<!-- SCENE 2 — BEATING HEART -->
+<section class="scene" id="scene-2">
+  <div class="heart-container">
+    <p class="heart-label">Something important needs your attention.</p>
+    <button class="heart-btn" id="heart-btn" aria-label="Tap the heart">
+      <svg class="heart-svg" viewBox="0 0 200 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hg" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#e8829a"/><stop offset="50%" stop-color="#c0152a"/><stop offset="100%" stop-color="#7a0a18"/>
+          </radialGradient>
+          <radialGradient id="hg2" cx="35%" cy="30%" r="30%">
+            <stop offset="0%" stop-color="rgba(255,200,210,0.5)"/><stop offset="100%" stop-color="rgba(255,200,210,0)"/>
+          </radialGradient>
+        </defs>
+        <path d="M100 170 C100 170 15 115 15 60 C15 30 38 10 65 10 C80 10 93 18 100 30 C107 18 120 10 135 10 C162 10 185 30 185 60 C185 115 100 170 100 170Z" fill="url(#hg)"/>
+        <path d="M100 170 C100 170 15 115 15 60 C15 30 38 10 65 10 C80 10 93 18 100 30 C107 18 120 10 135 10 C162 10 185 30 185 60 C185 115 100 170 100 170Z" fill="url(#hg2)"/>
+        <path d="M55 45 Q70 35 80 55" stroke="rgba(255,255,255,0.25)" stroke-width="4" stroke-linecap="round" fill="none"/>
+      </svg>
+    </button>
+    <p class="tap-text">tap the heart</p>
+  </div>
+</section>
+
+<!-- SCENE 3 — QUESTIONS -->
+<section class="scene" id="scene-3">
+  <div class="question-card">
+    <p class="q-step" id="q-step">Question 1 of 3</p>
+    <p class="q-text" id="q-text"></p>
+    <div class="options-grid" id="options-grid"></div>
+    <p class="reaction-text" id="reaction-text"></p>
+    <button class="next-btn" id="next-btn">Continue →</button>
+  </div>
+</section>
+
+<!-- SCENE 4 — PHOTO + VIDEO GALLERY -->
+<section class="scene" id="scene-4">
+  <p class="gallery-title">moments worth keeping 🥹</p>
+  <div class="photo-track" id="photo-track">
+
+    <!-- img1 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img1.jpeg" alt="Sidra" loading="lazy">
+        <p class="photo-caption">the superstar ✨</p>
+      </div>
+    </div>
+
+    <!-- img2 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img2.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">the princess 👑</p>
+      </div>
+    </div>
+
+    <!-- vd1 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <video class="photo-img video-item" src="images/vd1.mp4" muted playsinline loop preload="none"></video>
+        <p class="photo-caption" style="opacity:0"> </p>
+      </div>
+    </div>
+
+    <!-- img3 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img3.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">miss pretty 🌸</p>
+      </div>
+    </div>
+
+    <!-- img4 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img4.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">the aesthetic queen 🎨</p>
+      </div>
+    </div>
+
+    <!-- vd2 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <video class="photo-img video-item" src="images/vd2.mp4" muted playsinline loop preload="none" style="object-fit:contain;background:#0a0608;"></video>
+        <p class="photo-caption" style="opacity:0"> </p>
+      </div>
+    </div>
+
+    <!-- img5 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img5.jpeg" alt="Sidra" loading="lazy" style="object-position:center bottom;">
+        <p class="photo-caption">charismatic bae 💫</p>
+      </div>
+    </div>
+
+    <!-- vd3 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <video class="photo-img video-item" src="images/vd3.mp4" muted playsinline loop preload="none"></video>
+        <p class="photo-caption" style="opacity:0"> </p>
+      </div>
+    </div>
+
+    <!-- img6 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img6.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">style icon 👗</p>
+      </div>
+    </div>
+
+    <!-- img7 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img7.jpeg" alt="Sidra" loading="lazy">
+        <p class="photo-caption">magnetic personality 🧲</p>
+      </div>
+    </div>
+
+    <!-- vd4 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <video class="photo-img video-item" src="images/vd4.mp4" muted playsinline loop preload="none" style="object-fit:contain;background:#0a0608;"></video>
+        <p class="photo-caption" style="opacity:0"> </p>
+      </div>
+    </div>
+
+    <!-- img8 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img8.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">cutie patootie 🍬</p>
+      </div>
+    </div>
+
+    <!-- vd5 -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <video class="photo-img video-item" src="images/vd5.mp4" muted playsinline loop preload="none"></video>
+        <p class="photo-caption" style="opacity:0"> </p>
+      </div>
+    </div>
+
+    <!-- img9 — LAST -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <img class="photo-img" src="images/img9.jpeg" alt="Sidra" loading="lazy" style="object-fit:contain;background:#0a0608;">
+        <p class="photo-caption">🤗</p>
+      </div>
+    </div>
+
+  </div>
+  <button class="next-btn" id="gallery-next" style="display:block;margin-top:3rem;">there's more waiting for you →</button>
+</section>
+
+<!-- SCENE 5 — LETTER -->
+<section class="scene" id="scene-5">
+  <div class="letter-wrap">
+    <p class="letter-eyebrow">for you, Sidra</p>
+    <h2 class="letter-heading">a few honest words</h2>
+    <div class="letter-body" id="letter-body">
+      <p class="letter-para">Some people come into our lives and, over time, become a special part of our journey. Getting to know you over the years has been one of those experiences that I genuinely value. Six years is a long time, and throughout these years, I've had the opportunity to see different sides of you, witness your growth, and know the wonderful person you are.</p>
+      <p class="letter-para">One thing I've always appreciated about you is the way you carry yourself. You're hardworking, ambitious, stylish, confident, and someone who knows what she wants in life. I genuinely admire your dedication, the way you handle responsibilities, and the effort you put into everything you do. And beyond all these qualities, you have a good heart and a personality that makes you stand out.</p>
+      <p class="letter-para">I'm also glad that we get to work together and share this professional journey. Your support, cooperation, and the way you contribute genuinely mean a lot. Sometimes, we don't realize how much someone's presence and support can make a difference in our everyday lives, but I certainly appreciate yours.</p>
+      <p class="letter-para">On your special day, I wish you nothing but happiness, good health, peace of mind, and success in everything you set your heart on. May you achieve all the goals you're working towards, experience beautiful opportunities, travel to wonderful places, and create countless memories worth smiling about. Most importantly, I hope you always take care of yourself, stay healthy, keep that beautiful smile, and never lose the confidence and ambition that make you who you are.</p>
+      <p class="letter-para">You deserve to be happy, appreciated, respected, and surrounded by good things. I genuinely hope this new chapter of your life brings you everything you've been wishing for and even more.</p>
+      <p class="letter-para">Stay the wonderful person you are. Keep shining, keep growing, and keep being you.</p>
+      <p class="letter-para" style="font-weight:500; color:var(--blush);">Once again, a very Happy Birthday! ❤️</p>
+    </div>
+    <div class="song-block">
+      <span class="song-line">Tujhko main rakh loon wahan,</span>
+      <span class="song-line">jahan pe kahin hai mera yakeen.</span>
+      <span class="song-line" style="margin-top:1rem;">Main Maula se teri meri duniya maange,</span>
+      <span class="song-line">tu jo likh de toh usko hi haq maan loon main.</span>
+      <span class="song-attr">— for you, always</span>
+    </div>
+    <p class="letter-sign">— from Faraz 🥹</p>
+    <button class="next-btn" id="letter-next" style="display:block;margin-top:2.5rem;">one last thing →</button>
+  </div>
+</section>
+
+<!-- SCENE 6 — FINALE -->
+<section class="scene" id="scene-6">
+  <div class="finale-emoji">🎉</div>
+  <h2 class="finale-title">Happy Birthday</h2>
+  <h3 class="finale-name">Sidra Nurain ❤️</h3>
+  <p class="finale-sub">May this year bring you everything you deserve — which is everything good in this world.</p>
+  <button class="restart-btn" id="restart-btn">Ok fine, you can close this now... or stay 👀</button>
+</section>
+
+<script>
+const questions = [
+  {
+    text: "Six years. A lot has changed. But you — you only got better. Agree?",
+    options: ["I mean... maybe 😅", "I try my best", "Honestly yes 💅", "I didn't need six years to be this good 😂"],
+    reactions: ["Wrong. No maybe about it. 😌", "Try? No. You delivered. 🥹", "Correct. And we both know it. 💛", "Honestly? Fair. 💀"]
+  },
+  {
+    text: "You carry yourself like someone who has everything figured out. Do you know how rare that is?",
+    options: ["I fake it most days 😂", "I try", "Not really", "Maybe a little 💅"],
+    reactions: ["Real or not — you make it look effortless. That's the rare part. 🥹", "No. You don't just try. You actually do. 💛", "Well. Someone noticed. Keep reading. 🥹", "A little? Sidra. Come on. 😂"]
+  },
+  {
+    text: "What's harder — being as amazing as you are, or finding someone who actually sees it?",
+    options: ["Being amazing obviously 😂", "Finding someone who sees it", "Both are exhausting 😭", "Neither, I make it look easy 💅"],
+    reactions: ["Debatable. But you do make it look easy. 😌", "Someone does. And they mean it. Keep reading. 🥹", "You do too much. Rest a little. 💛", "The confidence. Iconic. 💀"]
+  }
+];
+
+let currentQ = 0, answered = false;
+
+// Particles
+const particlesEl = document.getElementById('particles');
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 4 + 2;
+  const colors = ['#c0152a','#e8829a','#d4836a','#c9a96e','#f2b8c6'];
+  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s;opacity:0;`;
+  particlesEl.appendChild(p);
+}
+
+// Confetti
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let confettiPieces = [], confettiRunning = false;
+function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+function launchConfetti() {
+  canvas.classList.add('active'); confettiRunning = true; confettiPieces = [];
+  const colors = ['#c0152a','#e8829a','#d4836a','#c9a96e','#f2b8c6','#ffffff'];
+  for (let i = 0; i < 120; i++) {
+    confettiPieces.push({ x:Math.random()*canvas.width, y:-10, w:Math.random()*10+4, h:Math.random()*6+3, color:colors[Math.floor(Math.random()*colors.length)], vx:(Math.random()-.5)*4, vy:Math.random()*4+2, angle:Math.random()*360, spin:(Math.random()-.5)*10, life:1 });
+  }
+  animateConfetti();
+}
+function animateConfetti() {
+  if (!confettiRunning) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  let alive = false;
+  confettiPieces.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy; p.vy+=.08; p.angle+=p.spin; p.life-=.004;
+    if (p.life>0 && p.y<canvas.height+20) {
+      alive=true; ctx.save(); ctx.globalAlpha=Math.min(p.life,1);
+      ctx.translate(p.x,p.y); ctx.rotate(p.angle*Math.PI/180);
+      ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+    }
+  });
+  if (alive) requestAnimationFrame(animateConfetti);
+  else { canvas.classList.remove('active'); confettiRunning=false; }
+}
+
+// Scene management
+let currentScene = 1;
+function goToScene(n) {
+  document.querySelectorAll('.scene').forEach(s => s.style.display='none');
+  document.getElementById(`scene-${n}`).style.display='flex';
+  currentScene = n;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i+1===n));
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (n===3) loadQuestion(0);
+  if (n===4) initGallery();
+  if (n===6) { launchConfetti(); setTimeout(launchConfetti, 2500); }
+}
+
+// Init
+document.getElementById('scene-1').style.display='flex';
+document.getElementById('scene-2').style.display='flex';
+['scene-3','scene-4','scene-5','scene-6'].forEach(id => document.getElementById(id).style.display='none');
+
+// Heart
+document.getElementById('heart-btn').addEventListener('click', () => {
+  const btn = document.getElementById('heart-btn');
+  btn.style.transform='scale(0.85)';
+  setTimeout(()=>{ btn.style.transform=''; }, 150);
+  setTimeout(()=>goToScene(3), 400);
+});
+
+// Questions
+function loadQuestion(index) {
+  currentQ=index; answered=false;
+  const q=questions[index];
+  document.getElementById('q-step').textContent=`Question ${index+1} of ${questions.length}`;
+  document.getElementById('q-text').textContent=q.text;
+  document.getElementById('reaction-text').textContent='';
+  document.getElementById('reaction-text').classList.remove('show');
+  document.getElementById('next-btn').style.display='none';
+  const grid=document.getElementById('options-grid');
+  grid.innerHTML='';
+  q.options.forEach((opt,i) => {
+    const btn=document.createElement('button');
+    btn.className='opt-btn'; btn.textContent=opt;
+    btn.addEventListener('click',()=>{
+      if(answered) return; answered=true;
+      document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const rt=document.getElementById('reaction-text');
+      rt.textContent=q.reactions[i]; rt.classList.add('show');
+      setTimeout(()=>{ document.getElementById('next-btn').style.display='block'; }, 600);
+    });
+    grid.appendChild(btn);
+  });
+}
+
+document.getElementById('next-btn').addEventListener('click',()=>{
+  if(currentQ<questions.length-1) loadQuestion(currentQ+1);
+  else goToScene(4);
+});
+
+// Gallery with video autoplay on scroll
+function initGallery() {
+  const frames = document.querySelectorAll('.photo-frame');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const vid=e.target.querySelector('video');
+        if(vid) vid.play().catch(()=>{});
+      } else {
+        const vid=e.target.querySelector('video');
+        if(vid) vid.pause();
+      }
+    });
+  }, { threshold: 0.3 });
+  frames.forEach(f=>{ f.classList.remove('visible'); obs.observe(f); });
+  setTimeout(()=>{ if(frames[0]) frames[0].classList.add('visible'); }, 200);
+}
+
+document.getElementById('gallery-next').addEventListener('click',()=>goToScene(5));
+document.getElementById('letter-next').addEventListener('click',()=>goToScene(6));
+document.getElementById('restart-btn').addEventListener('click',()=>{
+  document.querySelectorAll('.scene').forEach(s=>s.style.display='none');
+  document.getElementById('scene-1').style.display='flex';
+  document.getElementById('scene-2').style.display='flex';
+  currentScene=1;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===0));
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
